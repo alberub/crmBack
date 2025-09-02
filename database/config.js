@@ -4,20 +4,11 @@ require( 'dotenv' ).config();
 const pool = new Pool({
   user: process.env.USER,
   host: process.env.HOST,
-  database: 'crm',
+  database: 'terranovi',
   password: process.env.PASSWORD,    
-  port: 10029
+  port: 5432
 });
 
-// Configuración de la conexión a la base de datos sin usuario ni contraseña
-// const pool = new Pool({
-//     user: 'postgres',
-//     host: 'localhost',
-//     database: 'practicas',  
-//     port: 5432
-//   });
-
-// Función para probar la conexión y hacer una consulta simple
 async function probarConexion() {
   try {
     const res = await pool.query('SELECT NOW()');
@@ -32,34 +23,3 @@ module.exports = {
     probarConexion,
     pool
 }
-
-
-
-
-
-// const mongoose = require('mongoose');
-
-// const dbConnection = async () => {
-
-//     try {
-
-//         await mongoose.connect( process.env.DB_CNN, {
-//             useNewUrlParser: true, 
-//             useUnifiedTopology: true,
-//             useCreateIndex: true
-//         });
-
-//         console.log('DB online DB');
-        
-//     } catch (error) {
-
-//         console.log(error);
-//         throw new Error('Error al iniciar la base de datos');
-        
-//     }
-
-// }
-
-// module.exports = {
-//     dbConnection
-// }

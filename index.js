@@ -21,24 +21,20 @@ app.use(express.static('public'));
 
 app.use( '/api/login', require('./routes/auth') );
 
-app.use( '/api/padron', require('./routes/padron') );
+app.use( '/api/amortizacion', require('./modules/amortizacion/amortizacion.route') );
 
-app.use( '/api/gestion', require('./routes/gestion') );
+app.use( '/api/clientes', require('./modules/clientes/clientes.route') );
 
-app.use( '/api/paginado', require('./routes/paginado') );
+app.use('/api/creditos', require('./modules/creditos/creditos.route'));
 
-app.use( '/api/usuarios', require('./routes/usuarios') );
+app.use('/api/pagos', require('./modules/pagos/pagos.route'));
 
-// app.use( '/api/followings', require('./routes/followings') )
+app.use('/api/simulacion', require('./modules/simulaciones/simulaciones.route'));
 
-// app.use( '/api/login', require('./routes/auth') );
-
-// app.use( '/api/search', require('./routes/busqueda') );
-
-app.get( '*', ( req, res ) => {
-    res.sendFile( path.resolve(__dirname, './public/index.html') )
+app.get(/^\/(?!api\/).*/, (req, res) => {
+  res.sendFile(path.resolve(__dirname, './public/index.html'));
 });
 
 server.listen( process.env.PORT, () => {
-    console.log('Servidor ( server - socket io ) corriendo en puerto ' + process.env.PORT);
+    console.log('Servidor corriendo en puerto ' + process.env.PORT);
 });
